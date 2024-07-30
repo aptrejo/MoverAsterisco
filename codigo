@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+public class MoverAsterisco {
+    public static void main(String[] args) {
+        char[] arreglo = new char[10];
+        inicializarArreglo(arreglo);
+
+        Scanner scanner = new Scanner(System.in);
+        int posicion = 0;
+
+        while (true) {
+            imprimirArreglo(arreglo);
+
+            System.out.print("Teclea un número (positivo para mover a la derecha, negativo para mover a la izquierda, 0 para terminar): ");
+            int movimiento = scanner.nextInt();
+
+            if (movimiento == 0) {
+                break;
+            }
+
+            posicion = moverAsterisco(arreglo, posicion, movimiento);
+        }
+
+        scanner.close();
+    }
+
+    private static void inicializarArreglo(char[] arreglo) {
+        arreglo[0] = '*';
+        for (int i = 1; i < arreglo.length; i++) {
+            arreglo[i] = '#';
+        }
+    }
+
+    private static void imprimirArreglo(char[] arreglo) {
+        for (char c : arreglo) {
+            System.out.print(c);
+        }
+        System.out.println();
+    }
+
+    private static int moverAsterisco(char[] arreglo, int posicionActual, int movimiento) {
+        int nuevaPosicion = posicionActual + movimiento;
+        if (nuevaPosicion < 0) {
+            nuevaPosicion = 0;
+        } else if (nuevaPosicion >= arreglo.length) {
+            nuevaPosicion = arreglo.length - 1;
+        }
+
+        arreglo[posicionActual] = '#'; 
+        arreglo[nuevaPosicion] = '*'; 
+        return nuevaPosicion; 
+    }
+}
